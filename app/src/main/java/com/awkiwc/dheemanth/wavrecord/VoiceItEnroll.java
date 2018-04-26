@@ -28,7 +28,7 @@ public class VoiceItEnroll extends AsyncTask<Void, Void, String> {
         try {
 
             if (myVoiceIt == null) {
-                return "Voice Engine not initialized";
+                return "Voice Engine not initialized!\nPlease check your internet connection.";
             }
             String userID = MainActivity.userID;
             String password = MainActivity.password;

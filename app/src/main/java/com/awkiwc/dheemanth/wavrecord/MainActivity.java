@@ -27,8 +27,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity implements AsyncResponseV, AsyncResponse {
 
-    public static final String developerId = "e914663f3f1c4159ae0f60b31aa09ab8";
-    public static final String userID = "AWKIWCDevUser";
+    public static final String developerId = "cf7c9a5505934b5eb1912e71d55234c7";
+    public static final String userID = "AWKIWCTech1";
     public static final String password = "AWKIWC tech 01";
 
     private static final int RECORDER_BPP = 16;
