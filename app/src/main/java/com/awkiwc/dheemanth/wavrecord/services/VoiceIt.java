@@ -1,4 +1,4 @@
-package com.awkiwc.dheemanth.wavrecord;
+package com.awkiwc.dheemanth.wavrecord.services;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;

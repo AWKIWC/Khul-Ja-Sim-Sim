@@ -1,0 +1,115 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:paddingTop="30dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10px"
+            android:text="Enroll User Details."
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.awkiwc.dheemanth.wavrecord.views.widgets.CustomEditTextView
+                android:id="@+id/nameView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:hint="Phone Number"
+                android:inputType="number"
+                android:paddingBottom="10dp"
+                android:paddingLeft="12dp"
+                android:paddingTop="10dp"
+                android:textColor="#4c4c4c"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.awkiwc.dheemanth.wavrecord.views.widgets.CustomEditTextView
+                android:id="@+id/newPasswordView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:hint="New Password"
+                android:inputType="textPassword"
+                android:paddingBottom="10dp"
+                android:paddingLeft="12dp"
+                android:paddingTop="10dp"
+                android:textColor="#4c4c4c"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.awkiwc.dheemanth.wavrecord.views.widgets.CustomEditTextView
+                android:id="@+id/confirmPasswordView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingBottom="10dp"
+                android:paddingLeft="12dp"
+                android:paddingTop="10dp"
+                android:textColor="#4c4c4c"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <com.awkiwc.dheemanth.wavrecord.views.widgets.CustomButton
+            android:id="@+id/signupButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/rounded_corner_bluish_background"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Sign up"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,121 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:paddingTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/asset_row1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:gravity="center"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <com.awkiwc.dheemanth.wavrecord.views.widgets.CustomEditTextView
+            android:id="@+id/phoneNumberView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:inputType="number"
+            android:textSize="18sp"
+            android:paddingLeft="12dp"
+            android:hint="Phone Number"
+            android:textColor="#4c4c4c"
+            android:textColorHint="#4c4c4c"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <com.awkiwc.dheemanth.wavrecord.views.widgets.CustomEditTextView
+            android:id="@+id/passwordView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="12dp"
+            android:textSize="18sp"
+            android:inputType="textPassword"
+            android:textColorHint="#4c4c4c"
+            android:hint="Password"
+            android:textColor="#4c4c4c"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="6dp"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/header"
+            android:paddingTop="5dp"
+            android:paddingLeft="10px"
+            android:paddingRight="5dp"
+            android:text="Read the below voice phrase by holding the mic."
+            android:textColor="#999999"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tokenString"
+            android:paddingTop="20dp"
+            android:paddingLeft="10px"
+            android:paddingRight="5dp"
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/authStart"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:tint="#fff"
+            android:backgroundTint="@color/splash_text_color"
+            android:layout_gravity="center"
+            android:src="@android:drawable/ic_btn_speak_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.awkiwc.dheemanth.wavrecord.views.widgets.CustomButton
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_bluish_background"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

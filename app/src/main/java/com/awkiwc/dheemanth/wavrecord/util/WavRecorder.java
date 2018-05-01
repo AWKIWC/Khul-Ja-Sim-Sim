@@ -1,35 +1,17 @@
-package com.awkiwc.dheemanth.wavrecord;
+package com.awkiwc.dheemanth.wavrecord.util;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.concurrent.ThreadLocalRandom;
 
-
-public class MainActivity extends AppCompatActivity implements AsyncResponseV, AsyncResponse {
-
-    public static final String developerId = "cf7c9a5505934b5eb1912e71d55234c7";
-    public static final String userID = "AWKIWCTech1";
-    public static final String password = "AWKIWC tech 01";
+public class WavRecorder {
 
     private static final int RECORDER_BPP = 16;
     private static final String AUDIO_RECORDER_FILE_EXT_WAV = ".wav";
@@ -38,99 +20,19 @@ public class MainActivity extends AppCompatActivity implements AsyncResponseV, A
     private static final int RECORDER_SAMPLE_RATE = 44100;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    final int REQUEST_PERMISSION_CODE = 1000;
     short[] audioData;
-    VoiceIt voiceIt;
+
     private AudioRecord recorder = null;
     private int bufferSize = 0;
     private Thread recordingThread = null;
     private boolean isRecording = false;
-    private View.OnTouchListener btnTouch = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                Toast.makeText(MainActivity.this, "Started Recording...", Toast.LENGTH_SHORT).show();
 
-                if(view.getId() == R.id.recordStart) {
-                    showHeaderNTokenString();
-                }
-
-                startRecording();
-            } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                Toast.makeText(MainActivity.this, "Done Recording...", Toast.LENGTH_SHORT).show();
-                stopRecording();
-
-                if(view.getId() == R.id.recordStart) {
-                    //hideHeaderNTokenString();
-
-                    VoiceItEnroll voiceEn = new VoiceItEnroll(voiceIt, getFilename(), MainActivity.this);
-                    voiceEn.responseHandler = MainActivity.this;
-                    voiceEn.execute();
-
-                    File voiceFile = new File(getFilename());
-                    if (voiceFile.exists()) {
-                        voiceFile.delete();
-                    }
-
-                } else if (view.getId() == R.id.authStart) {
-                    VoiceItAuth voiceItAuth = new VoiceItAuth(voiceIt, getFilename(), MainActivity.this);
-                    voiceItAuth.responseHandler = MainActivity.this;
-                    voiceItAuth.execute();
-                }
-            }
-
-            return false;
-        }
-    };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        if (!checkPermissionFromDevice()) {
-            requestPermission();
-        }
-
-        VoiceItInit voiceInit = new VoiceItInit(MainActivity.this);
-        voiceInit.responseHandler = MainActivity.this;
-        voiceInit.execute();
-
-        setButtonHandlers();
-
-        String tokenString[] = {
-                "Hello I am very happy today",
-                "Never forget tomorrow is a new day",
-                "Eventually winter will turn into spring",
-                "Remember to wash your hands before eating",
-                "Zoos are filled with small and large animals",
-                "Remember to wash your hands before eating",
-                "Today is a nice day to go for a walk"
-        };
-
-        int randomNum = ThreadLocalRandom.current().nextInt(0, tokenString.length);
-
-        if(randomNum >= tokenString.length) {
-            randomNum = 0;
-        }
-
-        ((TextView) findViewById(R.id.tokenString)).setText(tokenString[randomNum]);
-
+    public WavRecorder() {
         bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLE_RATE, RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING) * 3;
         audioData = new short[bufferSize];
     }
 
-    private void showHeaderNTokenString() {
-        ((TextView) findViewById(R.id.header)).setVisibility(View.VISIBLE);
-        ((TextView) findViewById(R.id.tokenString)).setVisibility(View.VISIBLE);
-    }
-
-    private void setButtonHandlers() {
-        ((ImageButton) findViewById(R.id.recordStart)).setOnTouchListener(btnTouch);
-        ((ImageButton) findViewById(R.id.authStart)).setOnTouchListener(btnTouch);
-    }
-
-    private String getFilename() {
+    public String getFilename() {
         String filepath = Environment.getExternalStorageDirectory().getAbsolutePath();
         File file = new File(filepath, AUDIO_RECORDER_FOLDER);
 
@@ -157,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponseV, A
         return (file.getAbsolutePath() + "/" + AUDIO_RECORDER_TEMP_FILE);
     }
 
-    private void startRecording() {
+    public void startRecording() {
         recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 RECORDER_SAMPLE_RATE,
                 RECORDER_CHANNELS,
@@ -215,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponseV, A
         }
     }
 
-    private void stopRecording() {
+    public void stopRecording() {
         if (null != recorder) {
             isRecording = false;
 
@@ -324,50 +226,5 @@ public class MainActivity extends AppCompatActivity implements AsyncResponseV, A
         header[43] = (byte) ((totalAudioLen >> 24) & 0xff);
 
         out.write(header, 0, 44);
-    }
-
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.RECORD_AUDIO
-        }, REQUEST_PERMISSION_CODE);
-    }
-
-    private boolean checkPermissionFromDevice() {
-        int write_external_storage_result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
-
-        return write_external_storage_result == PackageManager.PERMISSION_GRANTED && record_audio_result == PackageManager.PERMISSION_GRANTED;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_PERMISSION_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permission Granted.", Toast.LENGTH_SHORT).show();
-
-                    VoiceItInit voiceInit = new VoiceItInit(MainActivity.this);
-                    voiceInit.responseHandler = MainActivity.this;
-                    voiceInit.execute();
-
-                } else {
-                    Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
-                }
-        }
-    }
-
-    @Override
-    public void handelResponse(VoiceIt voiceIt) {
-        if (voiceIt == null) {
-            Toast.makeText(MainActivity.this, "Failed to initialize Voice engine.\nPlease Check your internet connection or Relaunch the App.", Toast.LENGTH_SHORT);
-        } else {
-            this.voiceIt = voiceIt;
-        }
-    }
-
-    @Override
-    public void handelResponse(String response) {
-        Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
     }
 }
